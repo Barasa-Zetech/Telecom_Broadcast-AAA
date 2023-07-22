@@ -1,0 +1,59 @@
+#### AAA Principles and Configuration
+
+## Authentication, authorization and accounting (AAA)  Configuration
+
+sysname R2
+#
+aaa 
+ authentication-scheme default
+ authentication-scheme datacom
+ authorization-scheme default
+ authorization-scheme datacom
+ accounting-scheme default
+ domain default 
+ domain default_admin 
+ domain datacom 
+  authorization-scheme datacom
+ local-user admin password cipher OOCM4m($F4ajUn1vMEIBNUw#
+ local-user admin service-type http
+ local-user hcia@datacom password cipher Xn9I:9V>5XcF&h1G-z>Hy*1#
+ local-user hcia@datacom privilege level 3
+#
+firewall zone Local
+ priority 16
+#
+interface Ethernet0/0/0
+#
+interface Ethernet0/0/1
+#
+interface Serial0/0/0
+ link-protocol ppp
+#
+interface Serial0/0/1
+ link-protocol ppp
+#
+interface Serial0/0/2
+ link-protocol ppp
+#
+interface Serial0/0/3
+ link-protocol ppp
+#
+interface GigabitEthernet0/0/0
+#
+interface GigabitEthernet0/0/1
+#
+interface GigabitEthernet0/0/2
+#
+interface GigabitEthernet0/0/3
+ ip address 10.0.12.2 255.255.255.0 
+#
+wlan
+#
+interface NULL0
+#
+user-interface con 0
+user-interface vty 0 4
+ authentication-mode aaa
+user-interface vty 16 20
+#
+return 
